@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:note_taking_app/view/screens/login_screen/login_screen.dart';
+import 'package:note_taking_app/view/screens/auth_screens/forgot_pass_screen/forgot_pass_screen.dart';
+import 'package:note_taking_app/view/screens/auth_screens/login_screen/login_screen.dart';
+import 'package:note_taking_app/view/screens/auth_screens/singUp_screen/singUp_screen.dart';
 import 'package:note_taking_app/view/screens/main_screen/main_screen.dart';
-import 'package:note_taking_app/view/screens/singUp_screen/singUp_screen.dart';
+
 import 'package:note_taking_app/view/screens/welcome_screen/welcome_screen.dart';
 
 void main() {
@@ -18,6 +20,7 @@ class MyApp extends StatelessWidget {
       routes: {
         WelcomeScreen.id: (context) => WelcomeScreen(),
         LoginScreen.id: (context) => LoginScreen(),
+        ForgotPassScreen.id: (context) => ForgotPassScreen(),
         SignUpScreen.id: (context) => SignUpScreen(),
         MainScreen.id: (context) => MainScreen(),
       },

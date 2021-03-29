@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:note_taking_app/view/screens/components/input_text_field.dart';
+import 'package:note_taking_app/view/constants/constants.dart';
+import 'package:note_taking_app/view/screens/auth_screens/components/input_text_field.dart';
+import 'package:note_taking_app/view/screens/auth_screens/components/styled_button_auth.dart';
+import 'package:note_taking_app/view/screens/main_screen/main_screen.dart';
 
 class InputForm extends StatelessWidget {
   final String buttonText;
@@ -12,7 +15,7 @@ class InputForm extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+          borderRadius: BorderRadius.all(Radius.circular(kBorderRadiusButton)),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.shade500,
@@ -35,16 +38,12 @@ class InputForm extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      //  TODO
+                  StyledButtonAuth(
+                    buttonText: buttonText,
+                    callbackOnTap: () {
+                      Navigator.of(context).pushNamed(MainScreen.id);
+                      //  TODO: Authorization
                     },
-                    child: Text(buttonText),
-                    style: ElevatedButton.styleFrom(
-                      shape: new RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(20.0),
-                      ),
-                    ),
                   ),
                 ],
               ),

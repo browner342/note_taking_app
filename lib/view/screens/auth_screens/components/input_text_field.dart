@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:note_taking_app/view/constants/constants.dart';
 
 class InputTextField extends StatelessWidget {
   final String hintText;
@@ -15,9 +16,10 @@ class InputTextField extends StatelessWidget {
         decoration: InputDecoration(
           hintText: hintText,
           contentPadding:
-          EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+              EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(20.0)),
+            borderRadius:
+                BorderRadius.all(Radius.circular(kBorderRadiusButton)),
           ),
         ),
       ),

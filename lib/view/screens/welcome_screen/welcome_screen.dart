@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:note_taking_app/view/constants/constants.dart';
-import 'package:note_taking_app/view/screens/login_screen/login_screen.dart';
-import 'package:note_taking_app/view/screens/singUp_screen/singUp_screen.dart';
+import 'package:note_taking_app/view/screens/auth_screens/login_screen/login_screen.dart';
+import 'package:note_taking_app/view/screens/auth_screens/singUp_screen/singUp_screen.dart';
+
 import 'package:note_taking_app/view/screens/welcome_screen/components/welcome_button.dart';
 
 class WelcomeScreen extends StatelessWidget {

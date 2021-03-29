@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:note_taking_app/view/constants/constants.dart';
-import 'package:note_taking_app/view/screens/components/input_form.dart';
+import 'package:note_taking_app/view/screens/auth_screens/components/input_form.dart';
 
 class SignUpScreen extends StatelessWidget {
   static const String id = kSingUpScreenId;
