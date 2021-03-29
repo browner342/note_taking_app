@@ -41,7 +41,8 @@ class InputForm extends StatelessWidget {
                   StyledButtonAuth(
                     buttonText: buttonText,
                     callbackOnTap: () {
-                      Navigator.of(context).pushNamed(MainScreen.id);
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, MainScreen.id, (_) => false);
                       //  TODO: Authorization
                     },
                   ),

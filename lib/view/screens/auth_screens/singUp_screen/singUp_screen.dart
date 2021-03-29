@@ -11,7 +11,7 @@ class SignUpScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Sign Up'),
       ),
-      body: Center(
+      body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

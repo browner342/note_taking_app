@@ -12,7 +12,7 @@ class LoginScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Log In'),
       ),
-      body: Center(
+      body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
