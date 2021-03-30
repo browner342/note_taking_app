@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:note_taking_app/view/constants/constants.dart';
 import 'package:note_taking_app/view/screens/main_screen/components/side_drawer.dart';
@@ -10,8 +11,25 @@ class MainScreen extends StatelessWidget {
     return Scaffold(
       drawer: SideDrawer(),
       appBar: AppBar(),
-      body: Center(
-        child: Container(),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Center(
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius:
+                  BorderRadius.all(Radius.circular(kBorderRadiusButton)),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.shade500,
+                  offset: const Offset(3.0, 3.0),
+                  blurRadius: 5.0,
+                  spreadRadius: 2.0,
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

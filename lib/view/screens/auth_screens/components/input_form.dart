@@ -2,11 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:note_taking_app/view/constants/constants.dart';
 import 'package:note_taking_app/view/screens/auth_screens/components/input_text_field.dart';
 import 'package:note_taking_app/view/screens/auth_screens/components/styled_button_auth.dart';
+import 'package:note_taking_app/view/screens/main_screen/authentication_service.dart';
 import 'package:note_taking_app/view/screens/main_screen/main_screen.dart';
+import 'package:provider/provider.dart';
 
 class InputForm extends StatelessWidget {
   final String buttonText;
   InputForm({this.buttonText});
+
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +34,11 @@ class InputForm extends StatelessWidget {
           children: [
             InputTextField(
               hintText: 'Email',
+              controller: emailController,
             ),
             InputTextField(
               hintText: 'Password',
+              controller: passwordController,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -41,8 +48,13 @@ class InputForm extends StatelessWidget {
                   StyledButtonAuth(
                     buttonText: buttonText,
                     callbackOnTap: () {
-                      Navigator.pushNamedAndRemoveUntil(
-                          context, MainScreen.id, (_) => false);
+                      Provider.of<AuthenticationService>(context, listen: false)
+                          .logIn(
+                        email: emailController.text.trim(),
+                        password: passwordController.text.trim(),
+                      );
+                      // Navigator.pushNamedAndRemoveUntil(
+                      //     context, MainScreen.id, (_) => false);
                       //  TODO: Authorization
                     },
                   ),

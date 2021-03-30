@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:note_taking_app/view/screens/main_screen/authentication_service.dart';
+import 'package:provider/provider.dart';
 
 class SideDrawer extends StatelessWidget {
   @override
@@ -36,7 +38,10 @@ class SideDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.exit_to_app),
             title: Text('Logout'),
-            onTap: () => {Navigator.of(context).pop()},
+            onTap: () => {
+              Provider.of<AuthenticationService>(context, listen: false)
+                  .logOut()
+            },
           ),
         ],
       ),

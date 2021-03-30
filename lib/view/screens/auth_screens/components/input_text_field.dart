@@ -3,13 +3,15 @@ import 'package:note_taking_app/view/constants/constants.dart';
 
 class InputTextField extends StatelessWidget {
   final String hintText;
-  InputTextField({this.hintText});
+  final TextEditingController controller;
+  InputTextField({this.hintText, this.controller});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextField(
+        controller: controller,
         onChanged: (value) {
           //Do something with the user input.
         },
