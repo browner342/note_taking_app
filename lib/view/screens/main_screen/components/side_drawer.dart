@@ -38,10 +38,9 @@ class SideDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.exit_to_app),
             title: Text('Logout'),
-            onTap: () => {
-              Provider.of<AuthenticationService>(context, listen: false)
-                  .logOut()
-            },
+            onTap: () async =>
+                await Provider.of<AuthenticationService>(context, listen: false)
+                    .logOut(),
           ),
         ],
       ),

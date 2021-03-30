@@ -9,7 +9,8 @@ import 'package:provider/provider.dart';
 class InputForm extends StatelessWidget {
   final String buttonText;
   final AuthType authType;
-  InputForm({this.buttonText, this.authType});
+  final progress;
+  InputForm({this.buttonText, this.authType, this.progress});
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -39,10 +40,12 @@ class InputForm extends StatelessWidget {
             InputTextField(
               hintText: 'Email',
               controller: emailController,
+              isPassword: false,
             ),
             InputTextField(
               hintText: 'Password',
               controller: passwordController,
+              isPassword: true,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -51,21 +54,22 @@ class InputForm extends StatelessWidget {
                 children: [
                   StyledButtonAuth(
                     buttonText: buttonText,
-                    callbackOnTap: () {
+                    callbackOnTap: () async {
+                      progress?.show();
                       authType == AuthType.LogIn
-                          ? auth.logIn(
+                          ? await auth.logIn(
                               email: emailController.text.trim(),
                               password: passwordController.text.trim(),
                             )
-                          : auth.signUp(
+                          : await auth.signUp(
                               email: emailController.text.trim(),
                               password: passwordController.text.trim(),
                             );
 
                       if (authState.authStateChanges != null) {
-                        Navigator.pushNamedAndRemoveUntil(
-                            context, MainScreen.id, (_) => false);
+                        Navigator.pop(context);
                       }
+                      progress?.dismiss();
                     },
                   ),
                 ],
