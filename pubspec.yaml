@@ -36,6 +36,7 @@ dependencies:
   cloud_firestore: ^1.0.3
 
   provider: ^5.0.0
+  mockito: 4.0.0
 
 
 

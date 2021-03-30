@@ -53,6 +53,7 @@ class InputForm extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   StyledButtonAuth(
+                    key: Key(buttonText),
                     buttonText: buttonText,
                     callbackOnTap: () async {
                       progress?.show();
