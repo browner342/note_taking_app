@@ -21,6 +21,7 @@ class SignUpScreen extends StatelessWidget {
             ),
             InputForm(
               buttonText: 'Sign Up',
+              authType: AuthType.SignUp,
             ),
           ],
         ),

@@ -1,10 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:note_taking_app/data/authentication_servieces/authentication_service.dart';
 import 'package:note_taking_app/view/screens/auth_screens/forgot_pass_screen/forgot_pass_screen.dart';
 import 'package:note_taking_app/view/screens/auth_screens/login_screen/login_screen.dart';
 import 'package:note_taking_app/view/screens/auth_screens/singUp_screen/singUp_screen.dart';
-import 'package:note_taking_app/view/screens/main_screen/authentication_service.dart';
+
 import 'package:note_taking_app/view/screens/main_screen/main_screen.dart';
 
 import 'package:note_taking_app/view/screens/welcome_screen/welcome_screen.dart';

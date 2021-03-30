@@ -22,6 +22,7 @@ class LoginScreen extends StatelessWidget {
             ),
             InputForm(
               buttonText: 'Log In',
+              authType: AuthType.LogIn,
             ),
             TextButton(
               onPressed: () {

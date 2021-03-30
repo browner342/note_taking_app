@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
+enum AuthType {
+  LogIn,
+  SignUp
+}
+
 const kMainScreenId = '/mainScreenId';
 const kLoginScreenId = 'loginScreenId';
 const kSingUpScreenId = 'signUpScreenId';

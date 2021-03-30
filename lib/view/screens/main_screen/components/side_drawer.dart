@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:note_taking_app/view/screens/main_screen/authentication_service.dart';
+import 'package:note_taking_app/data/authentication_servieces/authentication_service.dart';
 import 'package:provider/provider.dart';
 
 class SideDrawer extends StatelessWidget {
