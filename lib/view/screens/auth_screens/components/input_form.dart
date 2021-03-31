@@ -3,7 +3,6 @@ import 'package:note_taking_app/data/authentication_servieces/authentication_ser
 import 'package:note_taking_app/view/constants/constants.dart';
 import 'package:note_taking_app/view/screens/auth_screens/components/input_text_field.dart';
 import 'package:note_taking_app/view/screens/auth_screens/components/styled_button_auth.dart';
-import 'package:note_taking_app/view/screens/main_screen/main_screen.dart';
 import 'package:provider/provider.dart';
 
 class InputForm extends StatelessWidget {
@@ -19,6 +18,7 @@ class InputForm extends StatelessWidget {
   Widget build(BuildContext context) {
     final auth = Provider.of<AuthenticationService>(context, listen: false);
     final authState = Provider.of<AuthenticationService>(context);
+    String message;
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -57,12 +57,14 @@ class InputForm extends StatelessWidget {
                     buttonText: buttonText,
                     callbackOnTap: () async {
                       progress?.show();
+
+                      //Check what type of auth and do login or sinUp
                       authType == AuthType.LogIn
-                          ? await auth.logIn(
+                          ? message = await auth.logIn(
                               email: emailController.text.trim(),
                               password: passwordController.text.trim(),
                             )
-                          : await auth.signUp(
+                          : message = await auth.signUp(
                               email: emailController.text.trim(),
                               password: passwordController.text.trim(),
                             );
@@ -71,6 +73,15 @@ class InputForm extends StatelessWidget {
                         Navigator.pop(context);
                       }
                       progress?.dismiss();
+
+                      return showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: new Text("Alert Dialog title"),
+                              content: new Text(message),
+                            );
+                          });
                     },
                   ),
                 ],
