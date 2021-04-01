@@ -85,7 +85,6 @@ class AuthenticationService implements BaseAuth {
         await _googleSignIn.signIn();
 
     if (googleSignInAccount != null) {
-      print('tralala');
       final GoogleSignInAuthentication googleSignInAuthentication =
           await googleSignInAccount.authentication;
 
@@ -117,8 +116,11 @@ class AuthenticationService implements BaseAuth {
 
       return "Logged in";
     } on FirebaseAuthException catch (e) {
-      print(e.message);
+      // print(e.message);
       return e.message;
+    } catch (e) {
+      // print(e);
+      return "Fail";
     }
   }
 }

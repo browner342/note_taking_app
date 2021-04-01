@@ -23,9 +23,33 @@ class MockGoogleSignIn extends Mock implements GoogleSignIn {}
 class MockGoogleSignInAccount extends Mock implements GoogleSignInAccount {
   @override
   String get email => 'test';
+
+  @override
+  Future<GoogleSignInAuthentication> get authentication async =>
+      MockGoogleSignInAuthentication();
+}
+
+class MockGoogleSignInAuthentication extends Mock
+    implements GoogleSignInAuthentication {
+  @override
+  String get accessToken => 'test';
+
+  @override
+  String get idToken => 'test';
 }
 
 class MockFacebookLogin extends Mock implements FacebookLogin {}
+
+class MockFacebookLoginResult extends Mock implements FacebookLoginResult {
+  MockFacebookLoginResult();
+  @override
+  FacebookAccessToken get accessToken => MockFacebookAccessToken();
+}
+
+class MockFacebookAccessToken extends Mock implements FacebookAccessToken {
+  @override
+  String get token => 'test';
+}
 
 void main() {
   final MockFirebaseAuth mockFirebaseAuth = MockFirebaseAuth();
@@ -101,10 +125,10 @@ void main() {
   });
 
   test('Google sign in all correct', () async {
-    GoogleSignInAccount googleAuth = MockGoogleSignInAccount();
-    // when(await mockGoogleSignIn.signIn()).thenAnswer((realInvocation) async => googleAuth);
+    when(mockGoogleSignIn.signIn())
+        .thenAnswer((realInvocation) async => MockGoogleSignInAccount());
 
-    expect(await authenticationService.signInWithGoogle(), "Succeeded");
+    expect(await authenticationService.signInWithGoogle(), "Logged In");
   });
 
   test('Google sign in when fail on google authorization should return Fail',
@@ -112,5 +136,22 @@ void main() {
     when(await mockGoogleSignIn.signIn()).thenAnswer((realInvocation) => null);
 
     expect(await authenticationService.signInWithGoogle(), "Fail");
+  });
+
+  test('Facebook sign in all correct', () async {
+    when(mockFacebookLogin.logIn(['email']))
+        .thenAnswer((_) async => MockFacebookLoginResult());
+
+    when(mockFirebaseAuth.signInWithCredential(FacebookAuthProvider.credential(
+            MockFacebookLoginResult().accessToken.token)))
+        .thenAnswer((realInvocation) => null);
+
+    expect(await authenticationService.signInWithFacebook(), "Logged in");
+  });
+
+  test('Facebook sign in when facebook login failed should return ', () async {
+    when(mockFacebookLogin.logIn(['email'])).thenAnswer((_) async => null);
+
+    expect(await authenticationService.signInWithFacebook(), "Fail");
   });
 }
