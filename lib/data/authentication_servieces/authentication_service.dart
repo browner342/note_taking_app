@@ -85,6 +85,7 @@ class AuthenticationService implements BaseAuth {
         await _googleSignIn.signIn();
 
     if (googleSignInAccount != null) {
+      print('tralala');
       final GoogleSignInAuthentication googleSignInAuthentication =
           await googleSignInAccount.authentication;
 
