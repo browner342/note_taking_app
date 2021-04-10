@@ -4,6 +4,7 @@ import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 
 abstract class BaseAuth {
   Future<void> logOut();
+  Future<String> resetPassword(String email);
   Future<String> logIn({String email, String password});
   Future<String> signUp({String email, String password});
   Future<String> signInWithGoogle();
@@ -43,6 +44,18 @@ class AuthenticationService implements BaseAuth {
     }
   }
 
+  @override
+  Future<String> resetPassword(String email) async {
+    try {
+      await _firebaseAuth.sendPasswordResetEmail(email: email);
+      return "Email was sent";
+    } on FirebaseAuthException catch (e) {
+      return e.message;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   /// Log In user
   /// return String
   /// when success => "Logged In"
@@ -52,6 +65,16 @@ class AuthenticationService implements BaseAuth {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
+
+      User user = FirebaseAuth.instance.currentUser;
+
+      if (!user.emailVerified) {
+        await user.sendEmailVerification();
+        await _firebaseAuth.signOut();
+
+        return "Verify your email";
+      }
+
       return "Logged In";
     } on FirebaseAuthException catch (e) {
       print(e.message);
@@ -63,14 +86,20 @@ class AuthenticationService implements BaseAuth {
 
   /// Sign Up user
   /// return String
-  /// when success => "Signed Up"
+  /// when success => "Signed Up, verify mail"
   /// when fail => message
   @override
   Future<String> signUp({String email, String password}) async {
     try {
       await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
-      return "Signed Up";
+
+      User user = FirebaseAuth.instance.currentUser;
+      await user.sendEmailVerification();
+
+      await _firebaseAuth.signOut();
+
+      return "Signed Up, Verify your email";
     } on FirebaseAuthException catch (e) {
       print(e.message);
       return e.message;
