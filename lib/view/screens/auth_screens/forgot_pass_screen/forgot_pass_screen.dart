@@ -3,7 +3,6 @@ import 'package:note_taking_app/data/authentication_servieces/authentication_ser
 import 'package:note_taking_app/view/constants/constants.dart';
 import 'package:note_taking_app/view/screens/auth_screens/components/input_text_field.dart';
 import 'package:note_taking_app/view/screens/auth_screens/components/styled_button_auth.dart';
-import 'package:note_taking_app/view/screens/welcome_screen/welcome_screen.dart';
 import 'package:provider/provider.dart';
 
 class ForgotPassScreen extends StatelessWidget {

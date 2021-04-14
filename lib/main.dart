@@ -4,9 +4,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:note_taking_app/data/authentication_servieces/authentication_service.dart';
+import 'package:note_taking_app/data_view/date/date_provider.dart';
 import 'package:note_taking_app/view/screens/auth_screens/forgot_pass_screen/forgot_pass_screen.dart';
 import 'package:note_taking_app/view/screens/auth_screens/login_screen/login_screen.dart';
 import 'package:note_taking_app/view/screens/auth_screens/singUp_screen/singUp_screen.dart';
+import 'package:note_taking_app/view/screens/edit_note_screen/edit_note_screen.dart';
 
 import 'package:note_taking_app/view/screens/main_screen/main_screen.dart';
 
@@ -30,7 +32,9 @@ Future<void> main() async {
         StreamProvider(
           create: (context) =>
               context.read<AuthenticationService>().authStateChanges,
-        )
+        ),
+        ChangeNotifierProvider<DateProvider>(
+            create: (_) => DateProvider(DateTime.now())),
       ],
     ),
   );
@@ -49,6 +53,7 @@ class MyApp extends StatelessWidget {
         ForgotPassScreen.id: (context) => ForgotPassScreen(),
         SignUpScreen.id: (context) => SignUpScreen(),
         MainScreen.id: (context) => MainScreen(),
+        EditNoteScreen.id: (context) => EditNoteScreen(),
       },
     );
   }
