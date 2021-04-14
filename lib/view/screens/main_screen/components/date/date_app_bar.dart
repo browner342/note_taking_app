@@ -12,11 +12,11 @@ class DateAppBar extends StatelessWidget {
     _selectDate(BuildContext context) async {
       final DateTime picked = await showDatePicker(
         context: context,
-        initialDate: date.showOnScreen, // Refer step 1
+        initialDate: dateFunc.getDate(), // Refer step 1
         firstDate: DateTime(2000),
         lastDate: DateTime(2025),
       );
-      if (picked != null && picked != date.showOnScreen)
+      if (picked != null && picked != dateFunc.getDate())
         dateFunc.setDate(picked);
     }
 

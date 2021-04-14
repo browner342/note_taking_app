@@ -1,44 +1,48 @@
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 
+DateTime getSystemTime() => DateTime.now();
+
 class DateProvider extends ChangeNotifier {
-  DateTime showOnScreen;
+  DateTime _showOnScreen;
+  final DateTime Function() _currentTime;
   int _counter = 0;
 
-  DateProvider(DateTime dateTime) {
-    showOnScreen = dateTime;
-  }
+  DateProvider(this._showOnScreen, [this._currentTime = getSystemTime]);
 
   void setDate(DateTime dateTime) {
-    showOnScreen = dateTime;
+    _showOnScreen = dateTime;
     notifyListeners();
   }
 
+  DateTime getDate() => _showOnScreen;
+
   String getFormattedDate() {
-    if (showOnScreen.day == DateTime.now().day) {
+    if (_showOnScreen.day == _currentTime().day) {
       return 'Today';
-    } else if (showOnScreen.day == DateTime.now().add(Duration(days: 1)).day) {
+    } else if (_showOnScreen.day == _currentTime().add(Duration(days: 1)).day) {
       return 'Tomorrow';
-    } else if (showOnScreen.day == DateTime.now().add(Duration(days: -1)).day) {
+    } else if (_showOnScreen.day ==
+        _currentTime().add(Duration(days: -1)).day) {
       return 'Yesterday';
     }
-    return DateFormat('EEE, d MMM').format(showOnScreen);
+    return DateFormat('EEE, d MMM').format(_showOnScreen);
   }
 
   void nextDay() {
-    showOnScreen = DateTime.now();
+    _showOnScreen = _currentTime();
 
     _counter++;
-    showOnScreen = showOnScreen.add(Duration(days: _counter));
+    _showOnScreen = _showOnScreen.add(Duration(days: _counter));
 
     notifyListeners();
   }
 
   void previousDay() {
-    showOnScreen = DateTime.now();
+    _showOnScreen = _currentTime();
 
     _counter--;
-    showOnScreen = showOnScreen.add(Duration(days: _counter));
+    _showOnScreen = _showOnScreen.add(Duration(days: _counter));
 
     notifyListeners();
   }
