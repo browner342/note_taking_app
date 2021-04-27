@@ -16,6 +16,7 @@ class DateProvider extends ChangeNotifier {
   }
 
   DateTime getDate() => _showOnScreen;
+  String getDateFNormal() => DateFormat('dd-MM-yyyy').format(_showOnScreen);
 
   String getFormattedDate() {
     if (_showOnScreen.day == _currentTime().day) {
